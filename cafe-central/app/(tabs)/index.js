@@ -86,6 +86,9 @@ export default function index() {
         </View>
       </View>
 
+      { /*=========== rodape =============*/}
+
+
       <View style={styles.rodape}>
         <Text style={styles.textoRodape}>®2026 Café Central. Todos os Direitos Reservados</Text>
         <Link href='/contato'>
