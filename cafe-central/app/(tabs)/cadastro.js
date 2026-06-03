@@ -133,7 +133,7 @@ const styles = StyleSheet.create(
 
     menuItem:{
       color: '#ffffff',
-      fontSize: 16,
+      fontWeight: 'bold',
     },
     
     container:{
@@ -161,12 +161,14 @@ const styles = StyleSheet.create(
     },
 
     blocoAuth:{
-        backgroundColor: '#f2f2f2',
-        gap: 15,
-        padding: 20,
+        backgroundColor: '#ffffff',
+        gap: 10,
+        padding: 30,
         borderRadius: 8,
-        elevation: 2,
-
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOpacity: 0.08,
+        shadowRadius: 4,
         shadowOffset: {width: 0, height: 2},
     },
 
@@ -180,7 +182,7 @@ const styles = StyleSheet.create(
         borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 4,
-        backgroundColor: '#fff',
+        backgroundColor: '#ffffff',
     },
 
     btnPrimario:{

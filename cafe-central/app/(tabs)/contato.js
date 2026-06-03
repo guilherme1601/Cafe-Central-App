@@ -88,9 +88,9 @@ const styles = StyleSheet.create(
       textAlign: 'center',
       marginbottom: 0,
       width: '100%',
-      height: 40,
+      height: 80,
+      alignItems: 'center',
     },
-
     textoRodape:{
       color: '#ffffff',
       textAlign: 'center',
