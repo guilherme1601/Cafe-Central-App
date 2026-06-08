@@ -1,0 +1,33 @@
+[
+    {
+      "id": "1",
+      "titulo": "Pão de Queijo Artesanal",
+      "descricao":"Recheado com queijo especial e assado na hora, mais sabor para o seu café.",
+      "preco": "R$ 3,50",
+      "img": "paoqueijo.jpg"
+    },
+
+    {
+      "id": "2",
+      "titulo": "Café Expresso",
+      "descricao":"Café preto forte e delicioso, feito com grãos selecionados e torrados na hora.",
+      "preco": "R$ 2,50",
+      "img": "cafeexpresso.jpg"
+    },
+
+    {
+      "id": "3",
+      "titulo": "Pão Francês Fresquinho",
+      "descricao":"Pão francês fresco e delicioso, feito com massas artesanais e assado na hora.",
+      "preco": "R$ 2,00",
+      "img": "paofrances.jpg"
+    },
+
+    {
+      "id": "4",
+      "titulo": "Suco Natural",
+      "descricao":"Suco de frutas naturais, feito com ingredientes frescos e sem adição de açúcar.",
+      "preco": "R$ 5,00",
+      "img": "suconatural.jpg"
+    }
+];

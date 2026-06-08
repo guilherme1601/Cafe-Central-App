@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity,TextInput } from 'react-native';
 import { Link } from 'expo-router';
 
-export default function index() {
+export default function login() {
   return (
     <ScrollView>
       <View style={styles.topo}>

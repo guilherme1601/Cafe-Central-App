@@ -1,41 +1,25 @@
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput, Image, FlatList } from 'react-native';
 import { Link } from 'expo-router';
 import { useState } from 'react';
+import cardapioJson from '../../assets/data/cardapio.json'
 
-export default function index() {
-  const cardapio = [
-    {
-      id: '1',
-      titulo: 'Pão de Queijo Artesanal',
-      descricao:'Recheado com queijo especial e assado na hora, mais sabor para o seu café.',
-      preco: 'R$ 3,50',
-      img: require('../../assets/images/paoqueijo.jpg'),
-    },
+export default function cardapio() {
+  
+  const imagemCardapio = {
+    'cafeexpresso.jpg' : require('../../assets/images/cafeexpresso.jpg'),
+    'paofrances.jpg' : require('../../assets/images/cafeexpresso.jpg'), 
+    'paoqueijo.jpg' : require('../../assets/images/cafeexpresso.jpg'),
+    'suconatural.jpg' : require('../../assets/images/cafeexpresso.jpg')
+  };
 
+  const cardapio = cardapioJson.map((cardapio) =>
+  (
     {
-      id: '2',
-      titulo: 'Café Expresso',
-      descricao:'Café preto forte e delicioso, feito com grãos selecionados e torrados na hora.',
-      preco: 'R$ 2,50',
-      img: require('../../assets/images/cafeexpresso.jpg'),
-    },
-
-    {
-      id: '3',
-      titulo: 'Pão Francês Fresquinho',
-      descricao:'Pão francês fresco e delicioso, feito com massas artesanais e assado na hora.',
-      preco: 'R$ 2,00',
-      img: require('../../assets/images/paofrances.jpg'),
-    },
-
-    {
-      id: '4',
-      titulo: 'Suco Natural',
-      descricao:'Suco de frutas naturais, feito com ingredientes frescos e sem adição de açúcar.',
-      preco: 'R$ 5,00',
-      img: require('../../assets/images/suconatural.jpg'),
+      ...cardapio,
+      img: imagemCardapio[cardapio.img],
     }
-  ];
+  )
+);
 
   const [busca, setBusca] = useState('');
 
