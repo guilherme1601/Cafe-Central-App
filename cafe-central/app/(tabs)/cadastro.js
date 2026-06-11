@@ -1,7 +1,74 @@
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { Link } from 'expo-router';
+import { useState } from 'react';
 
 export default function cadastro() {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [confirmaSenha, setConfirmaSenha] = useState('');
+  const [mensagemSistema, setMensagemSistema] = useState('');
+  const [tipoMensagem, setTipoMensagem] = useState(''); // 'sucesso' ou 'erro'
+
+  function validarCadastro() {
+    if (nome === ''){
+      setMensagemSistema('DIgite seu nome.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    if (/\d/.test(nome)){
+      setMensagemSistema('O nome não pode conter números.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    if (email === ''){
+      setMensagemSistema('Digite seu email.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    if (!email.includes('@') || !email.includes('.com')){
+      setMensagemSistema('Digite um email válido.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    if (senha === ''){
+      setMensagemSistema('Digite sua senha.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    if (senha.length < 6){
+      setMensagemSistema('A senha deve ter pelo menos 6 caracteres.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    if (confirmaSenha === ''){
+      setMensagemSistema('Confirme sua senha.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    if (confirmaSenha.length < 6){
+      setMensagemSistema('A senha deve ter pelo menos 6 caracteres!.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    if (senha !== confirmaSenha){
+      setMensagemSistema('As senhas não coincidem.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    setMensagemSistema('Cadastro realizado com sucesso!');
+    setTipoMensagem("sucesso");
+  }
+
   return (
     <ScrollView>
       <View style={styles.topo}>
@@ -43,34 +110,44 @@ export default function cadastro() {
                 <View style={styles.blocoAuth}>
                   <Text style={styles.label}>Nome</Text>
                   <TextInput placeholder='Digite seu nome' 
+                            value={nome}
+                            onChangeText={setNome}
                             style={styles.input}>
                   </TextInput>
                 
                   <Text style={styles.label}>Email</Text>
                   <TextInput placeholder='Digite seu email' 
                              keyboardType='email-address'
+                              value={email}
+                              onChangeText={setEmail}
                              style={styles.input}>
                   </TextInput>
 
                   <Text style={styles.label}>Senha</Text>
                   <TextInput placeholder='Digite sua senha' 
                              secureTextEntry={true}
+                             value={senha}
+                             onChangeText={setSenha}
                              style={styles.input}>
                   </TextInput>
 
                   <Text style={styles.label}>Confirma senha</Text>
                   <TextInput placeholder='Digite sua senha novamente' 
                              secureTextEntry={true}
+                             value={confirmaSenha}
+                             onChangeText={setConfirmaSenha}
                              style={styles.input}>
                   </TextInput>
 
-                  <TouchableOpacity style = {styles.btnPrimario}>
+                  <TouchableOpacity style = {styles.btnPrimario}
+                                    onPress={validarCadastro}>
                     <Text style= {styles.textoBotao}>
                       Cadastrar
                     </Text>
                   </TouchableOpacity>
 
-                  <Text style={styles.mensagemAuth}></Text>
+                  <Text style={tipoMensagem === "erro" ? 
+                              styles.mensagemErro : styles.mensagemSucesso}>{mensagemSistema}</Text>
 
                   <Text style={styles.linkAuth}>
                     Já possui uma conta?
@@ -199,13 +276,21 @@ const styles = StyleSheet.create(
         textAlign: 'center', 
     },
 
-    mensagemAuth:{
+    mensagemErro:{
+        color: 'red',
         textAlign: 'center',
         fontWeight: 'bold',
         marginTop: 10,
         marginHeight: 20,
-        
     },
+
+    mensagemSucesso:{
+        color: 'green',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginTop: 10,
+        marginHeight: 20,
+     },
 
     linkAuth:{
         color: '#000000',

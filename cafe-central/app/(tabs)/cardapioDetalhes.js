@@ -116,6 +116,25 @@ const styles = StyleSheet.create(
       textAlign: 'Center'
     },
 
+    tituloNome:{
+      color:'#black',
+      fontSize: 20,
+      fontWeight:'bold',
+      marginBottom: 8,
+      marginTop: 10,
+      alignItems: 'center'
+    },
+
+    cardNome:{},
+
+    cardDescricao:{},
+
+    cardPreco:{},
+
+    btnVoltar:{},
+
+    textoBtnVoltar:{},
+
     rodape:{
       backgroundColor: '#976739',
       textAlign: 'center',

@@ -1,7 +1,43 @@
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity,TextInput } from 'react-native';
 import { Link } from 'expo-router';
+import { useState } from 'react';
 
 export default function login() {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [mensagemSistema, setMensagemSistema] = useState('');
+  const [tipoMensagem, setTipoMensagem] = useState(''); // 'sucesso' ou 'erro'
+
+  function validarLogin() {
+    if (email === ''){
+      setMensagemSistema('Digite seu email.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    if (!email.includes('@') || !email.includes('.com')){
+      setMensagemSistema('Digite um email válido.');
+      setTipoMensagem('erro');
+      return
+    }
+  
+    if (senha === ''){
+      setMensagemSistema('Digite sua senha.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    if (senha.length < 6){
+      setMensagemSistema('A senha deve ter pelo menos 6 caracteres.');
+      setTipoMensagem('erro');
+      return
+    }
+
+    setMensagemSistema('Login realizado com sucesso!');
+    setTipoMensagem('sucesso');
+  }
+
+
   return (
     <ScrollView>
       <View style={styles.topo}>
@@ -44,19 +80,24 @@ export default function login() {
                         <Text style={styles.label}>Email</Text>
                         <TextInput placeholder='Digite seu e-mail'
                                     keyboardType='email-address'
+                                    value={email}
+                                    onChangeText={setEmail}
                                     style={styles.input} ></TextInput>
 
                         { /* CAMPO DE SENHA */}
                         <Text style={styles.label}>Senha</Text>
                         <TextInput placeholder='Digite sua senha'
                                     secureTextEntry = {true}
+                                    value={senha}
+                                    onChangeText={setSenha}
                                     style={styles.input} ></TextInput>
                         
-                        <TouchableOpacity style={styles.btnPrimario}>
+                        <TouchableOpacity style={styles.btnPrimario} onPress={validarLogin}>
                             <Text style={styles.textoBotao}>Login</Text>
                         </TouchableOpacity>
 
-                        <Text style={styles.mensagemAuth}></Text>
+                        <Text style={tipoMensagem === "erro" ? 
+                                   styles.mensagemErro : styles.mensagemSucesso}>{mensagemSistema}</Text>
 
                         <Text style={styles.linkAuth}>
                             Ainda não possui uma conta?
@@ -153,12 +194,21 @@ const styles = StyleSheet.create(
 
         },
 
-    mensagemAuth: {
+    mensagemErro: {
+        color: 'red',
         textAlign: 'center',
         fontWeight: 'bold',
         marginTop: 10,
         marginHeight: 20,
-        },
+    },
+
+    mensagemSucesso: {
+        color: 'green',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginTop: 10,
+        marginHeight: 20,
+    },
 
     linkAuth: {
         textAlign:'center',
