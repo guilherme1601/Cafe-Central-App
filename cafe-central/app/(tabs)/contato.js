@@ -69,7 +69,7 @@ import {
       <ScrollView>
           { /*=========== TOPO (HEADER) =============*/}
           { /*=========== Área de cabeçalho com logo e menu =============*/}
-         <Header ativo="sobre"></Header>
+         <Header ativo="contato"></Header>
   
           { /*=========== CONTEÚDO DA PÁGINA =============*/}
           <View style = {styles.container}>

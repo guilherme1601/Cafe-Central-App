@@ -145,10 +145,8 @@ export default function cadastro() {
 
 
       { /*=========== rodape =============*/}
-
-
       <Footer></Footer>
-      
+
     </ScrollView>
   );
 }

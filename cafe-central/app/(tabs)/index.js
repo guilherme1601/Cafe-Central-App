@@ -6,7 +6,7 @@ import Footer from '../../components/Footer'
 export default function index() {
   return (
     <ScrollView>
-      <Header ativo="sobre"></Header>
+      <Header ativo="contato"></Header>
 
       { /*=========== HERO =============*/}
       { /* Seção principal (banner incial) */}

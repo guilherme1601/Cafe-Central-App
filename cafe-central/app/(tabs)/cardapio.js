@@ -9,9 +9,9 @@ export default function cardapio() {
   
   const imagemCardapio = {
     'cafeexpresso.jpg' : require('../../assets/images/cafeexpresso.jpg'),
-    'paofrances.jpg' : require('../../assets/images/cafeexpresso.jpg'), 
-    'paoqueijo.jpg' : require('../../assets/images/cafeexpresso.jpg'),
-    'suconatural.jpg' : require('../../assets/images/cafeexpresso.jpg')
+    'paofrances.jpg' : require('../../assets/images/paofrances.jpg'), 
+    'paoqueijo.jpg' : require('../../assets/images/paoqueijo.jpg'),
+    'suconatural.jpg' : require('../../assets/images/suconatural.jpg')
   };
 
   const cardapio = cardapioJson.map((cardapio) =>
@@ -33,7 +33,7 @@ export default function cardapio() {
 
   return (
     <ScrollView>
-     <Header ativo="sobre"></Header>
+     <Header ativo="cardapio"></Header>
       
       { /* Conteudo da pagina*/}
       <View style={styles.cardapios}>
@@ -73,7 +73,7 @@ export default function cardapio() {
 
 
       <Footer></Footer>
-      
+
     </ScrollView>
   );
 }
