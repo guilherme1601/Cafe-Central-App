@@ -44,7 +44,7 @@ export default function login() {
 
   return (
     <ScrollView>
-      <Header ativo="sobre"></Header>
+      <Header ativo="login"></Header>
 
       { /* Conteudo da pagina*/}
 

@@ -9,7 +9,7 @@ export default function cardapioDetalhes() {
 
   return (
     <ScrollView>
-      <Header ativo="sobre"></Header>
+      <Header ativo="cardapioDetalhes"></Header>
 
       { /* Conteudo da pagina*/}
         <View style={styles.container}>
@@ -96,15 +96,40 @@ const styles = StyleSheet.create(
       alignItems: 'center'
     },
 
-    cardNome:{},
+    cardNome:{
+      color: '#976739',
+      fontSize: 20,
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
 
-    cardDescricao:{},
+    cardDescricao:{
+      textAlign: 'center',
+      color: 'black',
+      fontSize: 16,
+      margin: 10
+    },
 
-    cardPreco:{},
+    cardPreco:{
+      textAlign: 'center',
+      color: 'black',
+      fontSize: 16,
+      margin: 10,
+      fontWeight: 'bold'
+    },
 
-    btnVoltar:{},
+    btnVoltar:{ 
+        backgroundColor: '#976739',
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        marginTop: 10
+        },
 
-    textoBtnVoltar:{},
+    textoBtnVoltar:{
+        color: '#ffffff',
+        fontWeight: 'bold',
+        textAlign: 'center'},
 
     rodape:{
       backgroundColor: '#976739',
