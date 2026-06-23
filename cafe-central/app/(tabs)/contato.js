@@ -11,6 +11,7 @@ import {
    import Header from '../../components/Header'
    import Footer from '../../components/Footer'
    import mensagemSistema from '../../components/MensagemSistema'
+   
 
    
   export default function Contato() {
@@ -20,50 +21,86 @@ import {
 
     const [mensagemSistema, setMensagemSistema] = useState('');
     const [tipoMensagem, setTipoMensagem] = useState('');  // 'sucesso' ou 'erro'
+    const API_URL = "http://localhost:3000"
 
-    function validarFormulario() {
-      if (nome === '') {
-        setMensagemSistema('Digite seu nome.');
-        setTipoMensagem('erro');
-        return false;
-      }
-      if (/\d/.test(nome)) {
-        setMensagemSistema('O nome não pode conter números.');
-        setTipoMensagem('erro');
-        return false;
-      }
+  async function validarFormulario() {
+    if (nome === '') {
+      setMensagemSistema('Digite seu nome.');
+      setTipoMensagem('erro');
+      return false;
+    }
+    if (/\d/.test(nome)) {
+      setMensagemSistema('O nome não pode conter números.');
+      setTipoMensagem('erro');
+      return false;
+    }
 
-      if (email === '') {
-        setMensagemSistema('Digite seu email.');
-        setTipoMensagem('erro');
-        return false;
-      }
+    if (email === '') {
+      setMensagemSistema('Digite seu email.');
+      setTipoMensagem('erro');
+      return false;
+    }
 
-      if (email.includes('@') === false || email.includes('.com') === false) {
-        setMensagemSistema('Digite um email válido.');
-        setTipoMensagem('erro');
-        return false;
-      }
+    if (email.includes('@') === false || email.includes('.com') === false) {
+      setMensagemSistema('Digite um email válido.');
+      setTipoMensagem('erro');
+      return false;
+    }
 
-      if (mensagem === '') {
-        setMensagemSistema('Digite sua mensagem.');
-        setTipoMensagem('erro');
-        return false;
-      }
+    if (mensagem === '') {
+      setMensagemSistema('Digite sua mensagem.');
+      setTipoMensagem('erro');
+      return false;
+    }
 
-      if (mensagem.length < 10) {
-        setMensagemSistema('A mensagem deve conter pelo menos 10 caracteres.');
-        setTipoMensagem('erro');
-        return false;
-      }
+    if (mensagem.length < 10) {
+      setMensagemSistema('A mensagem deve conter pelo menos 10 caracteres.');
+      setTipoMensagem('erro');
+      return false;
+    }
 
-      setMensagemSistema('Mensagem enviada com sucesso!');
-      setTipoMensagem('sucesso');
-      
-      setNome('');
-      setEmail('');
-      setMensagem('');
-    };
+    //Tenta executar o bloco, se houver erro de rede, o código vai para o catch
+    try{
+      // Faz uma requisição HTTP para a rota da API usando o método POST
+      const resposta = await fetch(`${API_URL}/contato`,{
+        method: 'POST', // Define que a requisição vai ENVIAR DADOS
+        headers: {'Content-Type': 'application/json'}, // Informa que o corpo da requisição está JSON
+        credentials:'include', // Inclui cookies e sessão na requisição, útil para autenticação
+        body: JSON.stringify({
+          nome: nome,
+          email: email,
+          mensagem: mensagem
+        }) // Converte os dados de JavaScript para texto JSON antes de enviar
+      });
+      // Converte a resposta recebida da API de JSON para objeto JavaScript
+      const dados = await resposta.json() 
+
+      // Verifica se a resposta HTTP foi de sucesso
+      if(resposta.ok){
+        // Mostra a mensagem de sucesso vinda da API, 
+          //ou um texto padrão se ela não enviar nada
+        setMensagemSistema(dados.mensagem || "Mensagem enviada")
+        // Define o "estilo" da mensagem como sucesso
+        setTipoMensagem("sucesso")
+        // Limpa os campos do formulário
+        setNome('');
+        setEmail('');
+        setMensagem('');
+      } else{
+        // Mostra a mensagem de erro vinda da API,
+          // ou um texto padrão se ela não enviar nada
+        setMensagemSistema(dados.erro || "Erro ao enviar mensagem")
+        // Define o "estilo" da mensagem como erro
+        setTipoMensagem("erro") 
+      }
+    }catch(erro){
+      //  Executado quando acontece falha na conexão,
+        // como internet fora do ar ou servidor indisponivel
+      setMensagemSistema("Erro ao conectar com o servidor")
+      // Define o "estilo" da mensagem como erro
+      setTipoMensagem("erro")
+    }
+  }
 
    return (
       <ScrollView>

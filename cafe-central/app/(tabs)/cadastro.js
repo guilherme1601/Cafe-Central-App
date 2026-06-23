@@ -13,8 +13,9 @@ export default function cadastro() {
   const [confirmaSenha, setConfirmaSenha] = useState('');
   const [mensagemSistema, setMensagemSistema] = useState('');
   const [tipoMensagem, setTipoMensagem] = useState(''); // 'sucesso' ou 'erro'
+  const API_URL = "http://localhost:3000"
 
-  function validarCadastro() {
+  async function validarCadastro() {
     if (nome === ''){
       setMensagemSistema('DIgite seu nome.');
       setTipoMensagem('erro');
@@ -69,13 +70,54 @@ export default function cadastro() {
       return
     }
 
-    setMensagemSistema('Cadastro realizado com sucesso!');
-    setTipoMensagem("sucesso");
+    //Tenta executar o bloco, se houver erro de rede, o código vai para o cath
+    try{
+      // Faz uma requisição HTTP para a rota da API usando o método POST
+      const resposta = await fetch(`${API_URL}/cadastro`,{
+        method: 'POST', // Define que a requisição vai ENVIAR DADOS
+        headers: {'Content-Type': 'application/json'}, // Informa que o corpo da requisição está JSON
+        credentials:'include', // Inclui cookies e sessão na requisição, útil para autenticação
+        body: JSON.stringify({
+          nome: nome,
+          email: email,
+          senha: senha
+        }) // Converte os dados de JavaScript para texto JSON antes de enviar
+      });
+      // Converte a resposta recebida da API de JSON para objeto JavaScript
+      const dados = await resposta.json() 
+ 
+      // Verifica se a resposta HTTP foi de sucesso
+      if(resposta.ok){
+        // Mostra a mensagem de sucesso vinda da API, 
+          //ou um texto padrão se ela não enviar nada
+        setMensagemSistema(dados.mensagem || "Cadastro realizado")
+        // Define o "estilo" da mensagem como sucesso
+        setTipoMensagem("sucesso")
+        // Limpa os campos do formulário
+        setNome('')
+        setEmail('')
+        setSenha('')
+        setConfirmaSenha('')
+      } else{
+        // Mostra a mensagem de erro vinda da API,
+          // ou um texto padrão se ela não enviar nada
+        setMensagemSistema(dados.erro || "Erro ao cadastrar")
+        // Define o "estilo" da mensagem como erro
+        setTipoMensagem("erro") 
+      }
+    }catch(erro){
+      //  Executado quando acontece falha na conexão,
+        // como internet fora do ar ou servidor indisponivel
+      setMensagemSistema("Erro ao conectar com o servidor")
+      // Define o "estilo" da mensagem como erro
+      setTipoMensagem("erro")
+    }
   }
+
 
   return (
     <ScrollView>
-     <Header ativo = "cadastro"> </Header>
+     <Header ativo = "cadastroo"> </Header>
 
       { /* Conteudo da pagina*/}
         <View style={styles.container}>
@@ -150,7 +192,6 @@ export default function cadastro() {
     </ScrollView>
   );
 }
-
 
 const styles = StyleSheet.create(
   {
