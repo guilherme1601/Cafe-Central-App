@@ -7,7 +7,11 @@ import {
    } from 'react-native'; // Importa os componentes View e Text
    import {Link} from 'expo-router';
    import { useState } from 'react';
-import { TextInput } from 'react-native-web';
+   import { TextInput } from 'react-native-web';
+   import Header from '../../components/Header'
+   import Footer from '../../components/Footer'
+   import mensagemSistema from '../../components/MensagemSistema'
+
    
   export default function Contato() {
     const [nome, setNome] = useState('');
@@ -65,28 +69,8 @@ import { TextInput } from 'react-native-web';
       <ScrollView>
           { /*=========== TOPO (HEADER) =============*/}
           { /*=========== Área de cabeçalho com logo e menu =============*/}
-          <View style={styles.topo}>
+         <Header ativo="sobre"></Header>
   
-          { /* Logo do sistema */}
-          <Link href='/'>
-            <Text style={styles.logoP1}>Tech</Text>
-            <Text style={styles.logoP2}>Educa</Text>
-          </Link>
-  
-            { /* Menu de Navegação */}
-            <View style={styles.menu}>
-              <Link href='/'>
-                <Text style={styles.menuItem}> Início </Text>
-              </Link>
-              <Link href='/sobre'>
-                <Text style={styles.menuItem}> Sobre </Text>
-              </Link>
-              <Link href='/contato'>
-                <Text style={[styles.menuItem, styles.ativo]}> Contato </Text>
-              </Link>
-            </View>
-          </View>
-
           { /*=========== CONTEÚDO DA PÁGINA =============*/}
           <View style = {styles.container}>
             {/* Card branco que envolve o form */}
@@ -134,84 +118,166 @@ import { TextInput } from 'react-native-web';
 
           { /*=========== RODAPÉ =============*/}
           { /* Parte final da página */}
-          <View style={styles.rodape}>
-            { /* Texto de direitos de autorais */}
-            <Text style={styles.textoRodape}> 2026 TechEduca. Todos os direitos reservados.</Text>
-  
-            { /* Links de Contato */}
-            <Link href='/contato'>
-              <Text style={styles.linkRodape}>Entre em contato</Text>'
-            </Link>
-          </View>
-  
+          <Footer></Footer>
       </ScrollView>
    );
   }
   
   const styles = StyleSheet.create(
     {
-      topo: {
-        backgroundColor: '#1a4db3',
-        padding:20,
-        alignItems: 'center',
-        gap: 10,
-      },
-  
-      logoP1: {
-        color:'#ffffff',
-        fontSize:24,
-        fontWeight: 'bold',
-      },
-  
-      logoP2: {
-        color:'#ff6a00',
-        fontSize:24,
-        fontWeight: 'bold',
-      },
-  
-      menu: {
-        marginTop: 10,
-        alignItems: 'center',
-        gap: 10,
-      },
-  
-      menuItem: {
-        color: '#ffffff',
-        fontWeight: 'bold',
-      },
-  
-      ativo: {
-        color: '#ff6a00',
-      },
-  
-     
-  
-      rodape: {
-        backgroundColor: '#1a4db3',
+       topo:{
+      backgroundColor: '#976739',
+      padding: 20,
+      alignItems: 'center',
+      gap: 10
+    },
+
+    logo1:{
+      color: '#ffffff',
+      fontSize: 24,
+      fontWeight:'bold'
+    },
+
+    logo2:{
+      color: '#e6b061',
+      fontSize: 24,
+      fontWeight:'bold'
+    },
+
+    menu:{
+      marginTop: 10,
+      alignItems: 'center',
+      gap: 20,
+    },
+
+    menuItem:{
+      color: '#ffffff',
+      fontSize: 16,
+    },
+
+
+    container: {
         padding: 20,
-        alignItems: 'center',
-        gap: 8,
       },
-  
-      textoRodape: {
-        color : '#ffffff',
-        textAlign: 'center', 
-        marginBottom: 8,
+
+    paginaAuth: {
+        paddingVertical: 40,
+        paddingHorizontal: 20,
       },
-  
-      linkRodape: {
-        color: '#ff6a00',
+
+    cardContato: {
+        backgroundColor: '#fffff',
+        gap: 10,
+        padding: 30,
+        borderRadius: 8,
+        elevation: 3,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        shadowOffset: {
+        width: 0,
+        height: 2,
+        },
+
+        },
+
+    mensagemErro: {
+        color: 'red',
+        textAlign: 'center',
         fontWeight: 'bold',
-        textDecorationLine: 'none'
-      },
-  
-      tituloDestaque : {
-        color: '#1a4db3',
-        fontSize: 24,
+        marginTop: 10,
+        marginHeight: 20,
+    },
+
+    mensagemSucesso: {
+        color: 'green',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginTop: 10,
+        marginHeight: 20,
+    },
+
+    linkAuth: {
+        textAlign:'center',
+        marginTop: 20,
+        color: '#222',
+        fontWeight: 'bold'
+        },
+
+    linkAuthDestaque: {
+        color: "#222",
         fontWeight: 'bold',
         textAlign: 'center',
-        marginBottom: 20
-      }
-  
-    }
-  )
+        marginTop: 5,
+     },
+
+    tituloDestaque: {
+        color: '#976739',
+        fontSize: 28,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 10,
+        },
+
+    subtitulo: {
+        textAlign: 'center',
+        marginBottom: 20,
+        color: '#555',
+        fontSize: 16
+        },
+
+    label: {
+        fontWeight: 'bold',
+        color: '#976739'
+        },
+
+    TextInput: {
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 6,
+        fontSize: 16,
+        backgroundColor: '#ffffff'
+        },
+
+    btnEnviar: {
+        backgroundColor: '#976739',
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        marginTop: 10
+        },
+
+    textobtn: {
+        color: '#ffffff',
+        fontWeight: 'bold',
+        textAlign: 'center'
+        },
+
+    rodape:{
+      backgroundColor: '#976739',
+      textAlign: 'center',
+      marginbottom: 0,
+      width: '100%',
+      height: 60,
+      alignItems: 'center',
+      justifyContent: 'center',
+      
+    },
+
+    textoRodape:{
+      color: '#ffffff',
+      textAlign: 'center',
+      marginbottom: 7,
+    },
+
+    linkRodape:{
+      color: '#e6b061',
+      fontWeight: 'bold',
+      textDecorationLine: 'none',
+      textAlign: 'center',
+      
+    },
+
+  }
+);

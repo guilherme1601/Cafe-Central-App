@@ -2,6 +2,8 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput, Image,
 import { Link } from 'expo-router';
 import { useState } from 'react';
 import cardapioJson from '../../assets/data/cardapio.json'
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 
 export default function cardapio() {
   
@@ -31,31 +33,8 @@ export default function cardapio() {
 
   return (
     <ScrollView>
-      <View style={styles.topo}>
-
-      <Link href='/'>
-        <Text style={styles.logo1}>Café</Text>
-        <Text style={styles.logo2}>Central</Text>
-      </Link>
-
-
-        <View style={styles.menu}>
-          <Link href='/'>
-            <Text style={[styles.menuItem,styles.ativo]}> Inicio </Text>
-          </Link>
-        
-          <Link href='/sobre'>
-            <Text style={styles.menuItem}> Sobre </Text>
-          </Link>
-
-          <Link href='/contato'>
-            <Text style={styles.menuItem}> Contato </Text>
-          </Link>
-
-        </View>
-      </View>
-
-
+     <Header ativo="sobre"></Header>
+      
       { /* Conteudo da pagina*/}
       <View style={styles.cardapios}>
         <Text style={styles.tituloPagina}> Cardápio </Text>
@@ -93,15 +72,8 @@ export default function cardapio() {
       { /*=========== rodape =============*/}
 
 
-      <View style={styles.rodape}>
-        <Text style={styles.textoRodape}>®2026 Café Central. Todos os Direitos Reservados</Text>
-        <Link href='/contato'>
-          <Text style={styles.linkRodape}>Entre em contato</Text>
-        </Link>
-      </View>
-
-     
-
+      <Footer></Footer>
+      
     </ScrollView>
   );
 }
