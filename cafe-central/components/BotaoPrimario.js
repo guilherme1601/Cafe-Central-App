@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
       paddingVertical: 15,
       marginBottom: 7,
       borderRadius: 8,
-      minWidth: 150,
     },
 
     textoBotaoPri:{

@@ -1,9 +1,9 @@
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity,TextInput } from 'react-native';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useState } from 'react';
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
-import mensagemSistema from '../../components/MensagemSistema'
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+const API_URL = "http://localhost:3000"
 
 
 export default function login() {
@@ -12,7 +12,8 @@ export default function login() {
   const [mensagemSistema, setMensagemSistema] = useState('');
   const [tipoMensagem, setTipoMensagem] = useState(''); // 'sucesso' ou 'erro'
 
-  function validarLogin() {
+
+  async function validarLogin() {
     if (email === ''){
       setMensagemSistema('Digite seu email.');
       setTipoMensagem('erro');
@@ -37,14 +38,51 @@ export default function login() {
       return
     }
 
-    setMensagemSistema('Login realizado com sucesso!');
-    setTipoMensagem('sucesso');
-  }
+    //Tenta executar o bloco, se houver erro de rede, o código vai para o catch
+    try{
+      // Faz uma requisição HTTP para a rota da API usando o método POST
+      const resposta = await fetch(`${API_URL}/login`,{
+        method: 'POST', // Define que a requisição vai ENVIAR DADOS
+        headers: {'Content-Type': 'application/json'}, // Informa que o corpo da requisição está JSON
+        credentials:'include', // Inclui cookies e sessão na requisição, útil para autenticação
+        body: JSON.stringify({
+          email: email,
+          senha: senha
+        }) // Converte os dados de JavaScript para texto JSON antes de enviar
+      });
+      // Converte a resposta recebida da API de JSON para objeto JavaScript
+      const dados = await resposta.json() 
 
+      // Verifica se a resposta HTTP foi de sucesso
+      if(resposta.ok){
+        // Mostra a mensagem de sucesso vinda da API, 
+          //ou um texto padrão se ela não enviar nada
+        setMensagemSistema(dados.mensagem || "Login realizado com sucesso")
+        // Define o "estilo" da mensagem como sucesso
+        setTipoMensagem("sucesso")
+        // Limpa os campos do formulário
+        setEmail('')
+        setSenha('')
+        router.push('/cardapio')
+      } else{
+        // Mostra a mensagem de erro vinda da API,
+          // ou um texto padrão se ela não enviar nada
+        setMensagemSistema(dados.erro || "Erro ao fazer login")
+        // Define o "estilo" da mensagem como erro
+        setTipoMensagem("erro") 
+      }
+    }catch(erro){
+      //  Executado quando acontece falha na conexão,
+        // como internet fora do ar ou servidor indisponivel
+      setMensagemSistema("Erro ao conectar com o servidor")
+      // Define o "estilo" da mensagem como erro
+      setTipoMensagem("erro")
+    }
+  }
 
   return (
     <ScrollView>
-      <Header ativo="sobre"></Header>
+      <Header ativo="login"></Header>
 
       { /* Conteudo da pagina*/}
 

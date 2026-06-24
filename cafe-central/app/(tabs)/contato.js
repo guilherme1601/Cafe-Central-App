@@ -3,73 +3,98 @@ import {
     Text, // Para exibir textos (= p, h1...)
     TouchableOpacity, // Para botões clicáveis (= button)
     ScrollView, // Para a área principal com scroll,
-    StyleSheet // Para aplicar estilo na página
+    StyleSheet,// Para aplicar estilo na página
+    TextInput
    } from 'react-native'; // Importa os componentes View e Text
-   import {Link} from 'expo-router';
-   import { useState } from 'react';
-   import { TextInput } from 'react-native-web';
-   import Header from '../../components/Header'
-   import Footer from '../../components/Footer'
-   import mensagemSistema from '../../components/MensagemSistema'
+  import {Link, router} from 'expo-router';
+  import { useState } from 'react';
+  import Header from '../../components/Header'
+  import Footer from '../../components/Footer'
+  
+  const API_URL = "http://localhost:3000"
+  
 
-   
   export default function Contato() {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [mensagem, setMensagem] = useState('');
 
     const [mensagemSistema, setMensagemSistema] = useState('');
-    const [tipoMensagem, setTipoMensagem] = useState('');  // 'sucesso' ou 'erro'
+    const [tipoMensagem, setTipoMensagem] = useState('');  
+    const API_URL = "http://localhost:3000"
 
-    function validarFormulario() {
-      if (nome === '') {
-        setMensagemSistema('Digite seu nome.');
-        setTipoMensagem('erro');
-        return false;
-      }
-      if (/\d/.test(nome)) {
-        setMensagemSistema('O nome não pode conter números.');
-        setTipoMensagem('erro');
-        return false;
-      }
+  async function validarFormulario() {
+    if (nome === '') {
+      setMensagemSistema('Digite seu nome.');
+      setTipoMensagem('erro');
+      return false;
+    }
+    if (/\d/.test(nome)) {
+      setMensagemSistema('O nome não pode conter números.');
+      setTipoMensagem('erro');
+      return false;
+    }
 
-      if (email === '') {
-        setMensagemSistema('Digite seu email.');
-        setTipoMensagem('erro');
-        return false;
-      }
+    if (email === '') {
+      setMensagemSistema('Digite seu email.');
+      setTipoMensagem('erro');
+      return false;
+    }
 
-      if (email.includes('@') === false || email.includes('.com') === false) {
-        setMensagemSistema('Digite um email válido.');
-        setTipoMensagem('erro');
-        return false;
-      }
+    if (email.includes('@') === false || email.includes('.com') === false) {
+      setMensagemSistema('Digite um email válido.');
+      setTipoMensagem('erro');
+      return false;
+    }
 
-      if (mensagem === '') {
-        setMensagemSistema('Digite sua mensagem.');
-        setTipoMensagem('erro');
-        return false;
-      }
+    if (mensagem === '') {
+      setMensagemSistema('Digite sua mensagem.');
+      setTipoMensagem('erro');
+      return false;
+    }
 
-      if (mensagem.length < 10) {
-        setMensagemSistema('A mensagem deve conter pelo menos 10 caracteres.');
-        setTipoMensagem('erro');
-        return false;
-      }
+    if (mensagem.length < 10) {
+      setMensagemSistema('A mensagem deve conter pelo menos 10 caracteres.');
+      setTipoMensagem('erro');
+      return false;
+    }
 
-      setMensagemSistema('Mensagem enviada com sucesso!');
-      setTipoMensagem('sucesso');
-      
-      setNome('');
-      setEmail('');
-      setMensagem('');
-    };
+    try{
+      const resposta = await fetch (`${API_URL}/contato`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials:'include',
+        body: JSON.stringify({
+          nome: nome,
+          email: email,
+          mensagem: mensagem
+        })
+      });
+      const dados = await resposta.json()
+
+      if(resposta.ok){
+        setMensagemSistema(dados.mensagem || "Mensagem enviada")
+        // Define o "estilo" da mensagem como sucesso
+        setTipoMensagem("sucesso")
+        setNome('');
+        setEmail('');
+        setMensagem('');
+      } else{
+        setMensagemSistema(dados.erro || "Erro ao ao enviar mensagem")
+        setTipoMensagem("erro") 
+      }
+    } catch(erro){
+      setMensagemSistema("Erro ao conectar com o servidor")
+      setTipoMensagem("erro")
+    }
+
+  }
 
    return (
       <ScrollView>
           { /*=========== TOPO (HEADER) =============*/}
           { /*=========== Área de cabeçalho com logo e menu =============*/}
-         <Header ativo="sobre"></Header>
+         <Header ativo="contato"></Header>
   
           { /*=========== CONTEÚDO DA PÁGINA =============*/}
           <View style = {styles.container}>
@@ -109,9 +134,9 @@ import {
                 </Text>
               </TouchableOpacity>
 
-              <text style={tipoMensagem=== 'erro' ? styles.mensagemErro : styles.mensagemSucesso}>
+              <Text style={tipoMensagem=== 'erro' ? styles.mensagemErro : styles.mensagemSucesso}>
                 {mensagemSistema}
-              </text>
+              </Text>
             </View>
           </View>
           

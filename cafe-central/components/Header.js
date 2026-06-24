@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from   'react-native'
+import {View, Text, StyleSheet} from 'react-native'
 import {Link} from 'expo-router'
 
 export default function Header({ativo}){
@@ -13,15 +13,15 @@ export default function Header({ativo}){
 
         <View style={styles.menu}>
           <Link href='/'>
-            <Text style={[styles.menuItem,styles.ativo]}> Inicio </Text>
+            <Text style={[styles.menuItem, ativo ==="inicio" && styles.ativo]}> Inicio </Text>
           </Link>
         
           <Link href='/sobre'>
-            <Text style={styles.menuItem}> Sobre </Text>
+            <Text style={[styles.menuItem, ativo ==="sobre" && styles.ativo]}> Sobre </Text>
           </Link>
 
           <Link href='/contato'>
-            <Text style={styles.menuItem}> Contato </Text>
+            <Text style={[styles.menuItem, ativo ==="contato" && styles.ativo]}> Contato </Text>
           </Link>
 
         </View>
@@ -58,6 +58,11 @@ const styles = StyleSheet.create({
 
     menuItem:{
       color: '#ffffff',
-      fontSize: 16,
+      fontWeight: 'bold'
     },
+
+    ativo:{
+      color: '#e6b061'
+    }
+
 })

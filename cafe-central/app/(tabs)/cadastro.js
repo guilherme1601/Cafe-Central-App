@@ -1,22 +1,23 @@
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
-import { Link } from 'expo-router';
+import { Link, router} from 'expo-router';
 import { useState } from 'react';
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
-import mensagemSistema from '../../components/MensagemSistema'
-
+const API_URL = "http://localhost:3000"
 
 export default function cadastro() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [confirmaSenha, setConfirmaSenha] = useState('');
+
   const [mensagemSistema, setMensagemSistema] = useState('');
   const [tipoMensagem, setTipoMensagem] = useState(''); // 'sucesso' ou 'erro'
 
-  function validarCadastro() {
+
+  async function validarCadastro() {
     if (nome === ''){
-      setMensagemSistema('DIgite seu nome.');
+      setMensagemSistema('Digite seu nome.');
       setTipoMensagem('erro');
       return
     }
@@ -69,12 +70,40 @@ export default function cadastro() {
       return
     }
 
-    setMensagemSistema('Cadastro realizado com sucesso!');
-    setTipoMensagem("sucesso");
+    try{
+      const resposta = await fetch (`${API_URL}/cadastro`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials:'include',
+        body: JSON.stringify({
+          nome: nome,
+          email: email,
+          senha: senha
+        })
+      });
+
+      const dados = await resposta.json()
+
+      if (resposta.ok){
+        setMensagemSistema(dados.mensagem || "Cadastro realizado")
+        setTipoMensagem("sucesso")
+        setNome('')
+        setEmail('')
+        setSenha('')
+        setConfirmaSenha('')
+      } else{
+        setMensagemSistema(dados.erro || "Erro ao se cadastrar")
+        setTipoMensagem("erro")
+      }
+    }catch(erro){
+      setMensagemSistema("Erro ao conectar com o servidor")
+      setTipoMensagem("erro")
+    }
   }
 
   return (
     <ScrollView>
+
      <Header ativo = "cadastro"> </Header>
 
       { /* Conteudo da pagina*/}
@@ -145,14 +174,11 @@ export default function cadastro() {
 
 
       { /*=========== rodape =============*/}
-
-
       <Footer></Footer>
-      
+
     </ScrollView>
   );
 }
-
 
 const styles = StyleSheet.create(
   {
