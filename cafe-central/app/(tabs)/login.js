@@ -11,8 +11,12 @@ export default function login() {
   const [senha, setSenha] = useState('');
   const [mensagemSistema, setMensagemSistema] = useState('');
   const [tipoMensagem, setTipoMensagem] = useState(''); // 'sucesso' ou 'erro'
+  const API_URL = "http://localhost:3000"
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4c1e03a4726f69737be5bfaf17c96048f8e7c976
   async function validarLogin() {
     if (email === ''){
       setMensagemSistema('Digite seu email.');
