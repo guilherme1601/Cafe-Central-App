@@ -107,7 +107,8 @@ const styles = StyleSheet.create(
       textAlign: 'center',
       color: 'black',
       fontSize: 16,
-      margin: 10
+      margin: 10,
+      fontWeight: 'bold'
     },
 
     cardPreco:{
