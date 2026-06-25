@@ -75,8 +75,11 @@ git clone https://github.com/seu-usuario/cafe-central.git
 ```bash
 cd cafe-central
 ```
+    
+3. Execute o comando npm install
 
-3. Abra o arquivo `index.html` em seu navegador.
+
+4. execute o comando npm start
 
 ## Objetivo
 
