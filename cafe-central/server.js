@@ -128,7 +128,7 @@ app.post("/contato",async (req,res)=>{
             return res.status(400).json({erro: "Preencha todos os campos"});
         }
 
-        const sql = `INSERT INTO tb_mensagem (nome,email,mensagem) VALUES(?,?,?)`
+        const sql = `INSERT INTO tb_contato (nome,email,mensagem) VALUES(?,?,?)`
                     
         await conexao.execute(sql,[nome,email,mensagem])
         res.json({mensagem: "Mensagem enviada com sucesso!"});

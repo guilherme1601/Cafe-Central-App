@@ -74,7 +74,6 @@ import {
 
       if(resposta.ok){
         setMensagemSistema(dados.mensagem || "Mensagem enviada")
-        // Define o "estilo" da mensagem como sucesso
         setTipoMensagem("sucesso")
         setNome('');
         setEmail('');
