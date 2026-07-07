@@ -8,7 +8,7 @@ export default function cardapioDetalhes() {
     const {nome, descricao, preco} = useLocalSearchParams();
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.corpo}>
       <Header ativo="cardapioDetalhes"></Header>
 
       { /* Conteudo da pagina*/}
@@ -132,25 +132,9 @@ const styles = StyleSheet.create(
         fontWeight: 'bold',
         textAlign: 'center'},
 
-    rodape:{
-      backgroundColor: '#976739',
-      textAlign: 'center',
-      marginbottom: 0,
-      width: '100%',
-      height: 80,
-      alignItems: 'center',
-    },
-    textoRodape:{
-      color: '#ffffff',
-      textAlign: 'center',
-      marginbottom: 7,
-    },
-
-    linkRodape:{
-      color: '#e6b061',
-      fontWeight: 'bold',
-      textDecorationLine: 'none',
-      textAlign: 'center',
+    corpo: { 
+      flexGrow: 1,
+      justifyContent: 'space-between',
     },
 
   }

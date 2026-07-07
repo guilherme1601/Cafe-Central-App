@@ -90,7 +90,7 @@ import {
   }
 
    return (
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.corpo}>
           { /*=========== TOPO (HEADER) =============*/}
           { /*=========== Área de cabeçalho com logo e menu =============*/}
          <Header ativo="contato"></Header>
@@ -278,29 +278,9 @@ import {
         textAlign: 'center'
         },
 
-    rodape:{
-      backgroundColor: '#976739',
-      textAlign: 'center',
-      marginbottom: 0,
-      width: '100%',
-      height: 60,
-      alignItems: 'center',
-      justifyContent: 'center',
-      
-    },
-
-    textoRodape:{
-      color: '#ffffff',
-      textAlign: 'center',
-      marginbottom: 7,
-    },
-
-    linkRodape:{
-      color: '#e6b061',
-      fontWeight: 'bold',
-      textDecorationLine: 'none',
-      textAlign: 'center',
-      
+    corpo: { 
+      flexGrow: 1,
+      justifyContent: 'space-between',
     },
 
   }

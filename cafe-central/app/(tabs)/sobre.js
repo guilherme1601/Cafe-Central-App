@@ -5,7 +5,7 @@ import Footer from '../../components/Footer'
 
 export default function sobre() {
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.corpo}>
       <Header ativo="sobre"></Header>
 
       { /* Conteudo da pagina*/}
@@ -99,7 +99,7 @@ const styles = StyleSheet.create(
 
     card:{
       backgroundColor: '#f5f5f5',
-      padding: 15,
+      padding: 25,
       borderRadius: 8,
       marginBottom: 10,
       elevation: 3,
@@ -110,7 +110,6 @@ const styles = StyleSheet.create(
     },
 
     
-
     texto:{
       color: '#000000',
       fontSize: 16,
@@ -120,26 +119,9 @@ const styles = StyleSheet.create(
     
 
 
-    rodape:{
-      backgroundColor: '#976739',
-      textAlign: 'center',
-      marginbottom: 0,
-      width: '100%',
-      height: 80,
-      alignItems: 'center',
-    },
-
-    textoRodape:{
-      color: '#ffffff',
-      textAlign: 'center',
-      marginbottom: 7,
-    },
-
-    linkRodape:{
-      color: '#e6b061',
-      fontWeight: 'bold',
-      textDecorationLine: 'none',
-      textAlign: 'center',
+    corpo: { 
+      flexGrow: 1,
+      justifyContent: 'space-between',
     },
 
   }

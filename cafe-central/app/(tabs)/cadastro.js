@@ -102,7 +102,7 @@ export default function cadastro() {
   }
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.corpo}>
 
      <Header ativo = "cadastro"> </Header>
 
@@ -305,28 +305,10 @@ const styles = StyleSheet.create(
         marginTop: 5,
      },
 
-    rodape:{
-      backgroundColor: '#976739',
-      textAlign: 'center',
-      marginbottom: 0,
-      width: '100%',
-      height: 80,
-      alignItems: 'center',
+    corpo: { 
+      flexGrow: 1,
+      justifyContent: 'space-between',
     },
-
-    textoRodape:{
-      color: '#ffffff',
-      textAlign: 'center',
-      marginbottom: 7,
-
-    },
-
-    linkRodape:{
-      color: '#e6b061',
-      fontWeight: 'bold',
-      textDecorationLine: 'none',
-      textAlign: 'center',
-    },
-
+    
   }
 );

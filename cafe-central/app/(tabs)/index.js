@@ -5,8 +5,8 @@ import Footer from '../../components/Footer'
 
 export default function index() {
   return (
-    <ScrollView>
-      <Header ativo="contato"></Header>
+    <ScrollView contentContainerStyle={styles.corpo}>  
+      <Header ativo="inicio"></Header>
 
       { /*=========== HERO =============*/}
       { /* Seção principal (banner incial) */}
@@ -230,26 +230,9 @@ const styles = StyleSheet.create(
       lineHeight: 20,
     },
 
-    rodape:{
-      backgroundColor: '#976739',
-      textAlign: 'center',
-      marginbottom: 0,
-      width: '100%',
-      height: 80,
-      alignItems: 'center',
-    },
-
-    textoRodape:{
-      color: '#ffffff',
-      textAlign: 'center',
-      marginbottom: 7,
-    },
-
-    linkRodape:{
-      color: '#e6b061',
-      fontWeight: 'bold',
-      textDecorationLine: 'none',
-      textAlign: 'center',
+    corpo: { 
+      flexGrow: 1,
+      justifyContent: 'space-between',
     },
 
   }

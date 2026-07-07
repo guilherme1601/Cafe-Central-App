@@ -16,6 +16,7 @@ export default function Header({ativo}){
             <Text style={[styles.menuItem, ativo ==="inicio" && styles.ativo]}> Inicio </Text>
           </Link>
         
+        
           <Link href='/sobre'>
             <Text style={[styles.menuItem, ativo ==="sobre" && styles.ativo]}> Sobre </Text>
           </Link>

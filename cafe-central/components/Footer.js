@@ -36,4 +36,6 @@ const styles = StyleSheet.create({
       textDecorationLine: 'none',
       textAlign: 'center',
     },
+
+    
 })

@@ -81,7 +81,7 @@ export default function login() {
   }
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.corpo}>
       <Header ativo="login"></Header>
 
       { /* Conteudo da pagina*/}
@@ -277,30 +277,12 @@ const styles = StyleSheet.create(
         textAlign: 'center'
         },
 
-    rodape:{
-      backgroundColor: '#976739',
-      textAlign: 'center',
-      marginbottom: 0,
-      width: '100%',
-      height: 60,
-      alignItems: 'center',
-      justifyContent: 'center',
+    corpo: { 
+      flexGrow: 1,
+      justifyContent: 'space-between',
+    },
       
-    },
-
-    textoRodape:{
-      color: '#ffffff',
-      textAlign: 'center',
-      marginbottom: 7,
-    },
-
-    linkRodape:{
-      color: '#e6b061',
-      fontWeight: 'bold',
-      textDecorationLine: 'none',
-      textAlign: 'center',
-      
-    },
+    
 
   }
 );
